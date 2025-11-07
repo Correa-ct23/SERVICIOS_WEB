@@ -144,3 +144,5 @@ D:\Workspace\API.J.Movies\API.J.Movies\obj\Debug\net8.0\refint\API.J.Movies.dll
 D:\Workspace\API.J.Movies\API.J.Movies\obj\Debug\net8.0\API.J.Movies.pdb
 D:\Workspace\API.J.Movies\API.J.Movies\obj\Debug\net8.0\API.J.Movies.genruntimeconfig.cache
 D:\Workspace\API.J.Movies\API.J.Movies\obj\Debug\net8.0\ref\API.J.Movies.dll
+D:\Workspace\API.J.Movies\API.J.Movies\bin\Debug\net8.0\AutoMapper.dll
+D:\Workspace\API.J.Movies\API.J.Movies\obj\Debug\net8.0\API.J.Movies.sourcelink.json

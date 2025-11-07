@@ -10,6 +10,6 @@ namespace API.J.Movies.DAL.Models
 
         public DateTime CreatedDate { get; set; } //ME SIRVE PARA GUARDAR LA FECHA DE CREACION
 
-        public DateTime ModifiedDate { get; set; } //ME SIRVE PARA GUARDAR LA FECHA DE MODIFICACION
+        public DateTime? ModifiedDate { get; set; } //ME SIRVE PARA GUARDAR LA FECHA DE MODIFICACION
     }
 }

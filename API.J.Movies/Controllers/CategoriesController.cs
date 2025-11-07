@@ -21,7 +21,8 @@ namespace API.J.Movies.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ICollection<CategoryDto>>> GetCategoriesAsync() { 
+        public async Task<ActionResult<ICollection<CategoryDto>>> GetCategoriesAsync() 
+        { 
             var categories = await _categoryServices.GetCategoriesAsync();
             return Ok(categories);
         }
