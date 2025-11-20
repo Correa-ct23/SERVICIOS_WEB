@@ -1,5 +1,6 @@
 
 using API.J.Movies.DAL;
+using API.J.Movies.DAL.Dtos;
 using API.J.Movies.DAL.Models;
 using API.J.Movies.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
@@ -24,16 +25,16 @@ public class CategoryRepository : ICategoryRepository
 		return await _context.categories.AsNoTracking().AnyAsync(c => c.Name == name);
 	}
 
-	public async Task<bool> CreateCategoryAsync(Category category)
+	public async Task<bool> CreateCategoryAsync(Category categoryDto)
     {
-        category.CreatedDate = DateTime.UtcNow;
-        await _context.categories.AddAsync(category);
+        categoryDto.CreatedDate = DateTime.UtcNow;
+        await _context.categories.AddAsync(categoryDto);
         return await SaveAsync();
 	}
 
     public async Task<bool> DeleteCategoryAsync(int id)
     {
-        var category = await GetCategoriesAsync(id);
+        var category = await GetCategoryAsync(id);
 
 		if (category == null) return false;
 
@@ -46,7 +47,7 @@ public class CategoryRepository : ICategoryRepository
         return await _context.categories.AsNoTracking().OrderBy(c => c.Name).ToListAsync();
     }
 
-    public async Task<Category> GetCategoriesAsync(int id)
+    public async Task<Category> GetCategoryAsync(int id)
     {
         return await _context.categories.AsNoTracking().FirstOrDefaultAsync(c => c.Id == id);
 	}

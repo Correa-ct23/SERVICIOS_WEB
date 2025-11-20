@@ -7,15 +7,15 @@ namespace API.J.Movies.Services.IServices
     {
         Task<ICollection<CategoryDto>> GetCategoriesAsync(); //RETORNA UNA LISTA DE CATEGORIAS
 
-        Task<CategoryDto> GetCategoriesAsync(int id); //RETORNA UNA CATEGORIA POR ID
+        Task<CategoryDto> GetCategoryAsync(int id); //RETORNA UNA CATEGORIA POR ID
 
         Task<bool> CategoryExistsById(int id);
 
         Task<bool> CategoryExistsByName(string name);
 
-        Task<bool> CreateCategoryAsync(Category category);
+        Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryDto);
 
-        Task<bool> UpdateCategoryAsync(Category category);
+        Task<CategoryDto> UpdateCategoryAsync(int id, Category category);
 
         Task<bool> DeleteCategoryAsync(int id);
     }
