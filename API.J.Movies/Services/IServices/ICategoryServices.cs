@@ -1,5 +1,4 @@
 ﻿using API.J.Movies.DAL.Dtos;
-using API.J.Movies.DAL.Models;
 
 namespace API.J.Movies.Services.IServices
 {
@@ -15,7 +14,7 @@ namespace API.J.Movies.Services.IServices
 
         Task<CategoryDto> CreateCategoryAsync(CategoryCreateDto categoryDto);
 
-        Task<CategoryDto> UpdateCategoryAsync(int id, Category category);
+        Task<CategoryDto> UpdateCategoryAsync(CategoryCreateDto category, int id);
 
         Task<bool> DeleteCategoryAsync(int id);
     }

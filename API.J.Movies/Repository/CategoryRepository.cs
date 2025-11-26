@@ -1,6 +1,5 @@
 
 using API.J.Movies.DAL;
-using API.J.Movies.DAL.Dtos;
 using API.J.Movies.DAL.Models;
 using API.J.Movies.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
@@ -34,9 +33,10 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<bool> DeleteCategoryAsync(int id)
     {
-        var category = await GetCategoryAsync(id);
+        var category = await _context.categories
+                .FirstOrDefaultAsync(c => c.Id == id);
 
-		if (category == null) return false;
+        if (category == null) return false;
 
         _context.categories.Remove(category);
         return await SaveAsync();
