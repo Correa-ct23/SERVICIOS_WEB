@@ -9,5 +9,6 @@ namespace API.J.Movies.DAL
 
         }
         public DbSet<Models.Category> categories { get; set; }
+        public DbSet<Models.Movie> movies { get; set; }
     }
 }

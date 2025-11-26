@@ -1,5 +1,4 @@
-﻿using API.J.Movies.DAL.Dtos;
-using API.J.Movies.DAL.Models;
+﻿using API.J.Movies.DAL.Models;
 
 namespace API.J.Movies.Repository.IRepository;
 public interface ICategoryRepository

@@ -1,6 +1,5 @@
 ﻿using API.J.Movies.DAL.Dtos;
 using API.J.Movies.DAL.Models;
-using API.J.Movies.Repository;
 using API.J.Movies.Repository.IRepository;
 using API.J.Movies.Services.IServices;
 using AutoMapper;
@@ -48,7 +47,7 @@ namespace API.J.Movies.Services
 
         public async Task<bool> DeleteCategoryAsync(int id)
         {
-            await GetCategoryAsync(id);
+            await GetCategoryByIdAsync(id);
 
             var isDeleted = await _categoryRepository.DeleteCategoryAsync(id);
 
@@ -68,7 +67,8 @@ namespace API.J.Movies.Services
 
         public async Task<CategoryDto> GetCategoryAsync(int id)
         {
-            var category = await _categoryRepository.GetCategoryAsync(id);
+            var category = await GetCategoryByIdAsync(id);
+
             return _mapper.Map<CategoryDto>(category);
 
         }
@@ -76,7 +76,7 @@ namespace API.J.Movies.Services
         public async Task<CategoryDto> UpdateCategoryAsync(CategoryCreateDto category, int id)
         {
             //Verificar si la categoría existe
-            var existingCategory = await GetCategoryAsync(id);
+            var existingCategory = await GetCategoryByIdAsync(id);
 
             var nameExists = await _categoryRepository.CategoryExistsByName(category.Name);
             if (nameExists)
@@ -97,6 +97,18 @@ namespace API.J.Movies.Services
 
             //retornar el CategoryDto actualizado
             return _mapper.Map<CategoryDto>(existingCategory);
+        }
+
+        private async Task<Category> GetCategoryByIdAsync(int id)
+        {
+            var category = await _categoryRepository.GetCategoryAsync(id);
+
+            if (category == null)
+            {
+                throw new InvalidOperationException($"No se encontró la categoría con ID: '{id}'");
+            }
+
+            return category;
         }
     }
 }

@@ -6,45 +6,45 @@ namespace API.J.Movies.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : ControllerBase
+    public class MovieController:ControllerBase
     {
-        private readonly ICategoryServices _categoryServices;
+        private readonly IMovieServices _movieServices;
 
-        public CategoriesController(ICategoryServices categoryServices)
+        public MovieController(IMovieServices movieServices)
         {
-            _categoryServices = categoryServices;
+            _movieServices = movieServices;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ICollection<CategoryDto>>> GetCategoriesAsync() 
-        { 
-            var categories = await _categoryServices.GetCategoriesAsync();
-            return Ok(categories);
+        public async Task<ActionResult<ICollection<MovieDto>>> GetMoviesAsync()
+        {
+            var movies = await _movieServices.GetMoviesAsync();
+            return Ok(movies);
         }
 
-        [HttpGet("{id:int}", Name = "GetCategoryAsync")]
+        [HttpGet("{id:int}", Name = "GetMovieAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<CategoryDto>> GetCategoryAsync(int id)
+        public async Task<ActionResult<MovieDto>> GetMovieAsync(int id)
         {
-            var categoryDto = await _categoryServices.GetCategoryAsync(id);
-            return Ok(categoryDto);
+            var movieDto = await _movieServices.GetMovieAsync(id);
+            return Ok(movieDto);
         }
 
-        [HttpPost(Name = "CreateCategoryAsync")]
+        [HttpPost(Name = "CreateMovieAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
 
-        public async Task<ActionResult<CategoryDto>> CreateCategoryAsync([FromBody] CategoryCreateDto categoryCreateDto)
+        public async Task<ActionResult<MovieDto>> CreateMovieAsync([FromBody] MovieCreateDto movieCreateDto)
         {
 
             if (!ModelState.IsValid)
@@ -54,9 +54,9 @@ namespace API.J.Movies.Controllers
 
             try
             {
-                var createdCategory = await _categoryServices.CreateCategoryAsync(categoryCreateDto);
+                var createdMovie = await _movieServices.CreateMovieAsync(movieCreateDto);
 
-                return CreatedAtRoute("GetCategoryAsync", new { id = createdCategory.Id }, createdCategory);
+                return CreatedAtRoute("GetMovieAsync", new { id = createdMovie.Id }, createdMovie);
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("Ya existe"))
             {
@@ -69,13 +69,13 @@ namespace API.J.Movies.Controllers
             }
         }
 
-        [HttpPut("{id:int}", Name = "UpdateCategoryAsync")]
+        [HttpPut("{id:int}", Name = "UpdateMovieAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CategoryDto>> UpdateCategoryAsync([FromBody] CategoryCreateDto categoryCreateDto, int id)
+        public async Task<ActionResult<MovieDto>> UpdateMovieAsync([FromBody] MovieCreateDto movieCreateDto, int id)
         {
             if (!ModelState.IsValid)
             {
@@ -84,8 +84,8 @@ namespace API.J.Movies.Controllers
 
             try
             {
-                var updatedCategory = await _categoryServices.UpdateCategoryAsync(categoryCreateDto, id);
-                return Ok(updatedCategory);
+                var updatedMovie = await _movieServices.UpdateMovieAsync(movieCreateDto, id);
+                return Ok(updatedMovie);
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("Ya existe"))
             {
@@ -101,18 +101,18 @@ namespace API.J.Movies.Controllers
             }
         }
 
-        [HttpDelete("{id:int}", Name = "DeleteCategoryAsync")]
+        [HttpDelete("{id:int}", Name = "DeleteMovieAsync")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> DeleteCategoryAsync(int id)
+        public async Task<ActionResult> DeleteMovieAsync(int id)
         {
             try
             {
-                var deletedCategory = await _categoryServices.DeleteCategoryAsync(id);
-                return Ok(deletedCategory);
+                var deletedMovie = await _movieServices.DeleteMovieAsync(id);
+                return Ok(deletedMovie);
             }
             catch (InvalidOperationException ex) when (ex.Message.Contains("No se encontró"))
             {
