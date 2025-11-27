@@ -8,5 +8,15 @@ namespace API.J.Movies.DAL.Models
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public string Duration { get; set; }
+
+        public string Description { get; set; }
+
+        [Required]
+        public string Clasification { get; set; }
+
+
     }
 }
